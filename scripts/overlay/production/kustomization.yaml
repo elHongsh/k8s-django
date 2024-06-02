@@ -1,8 +1,6 @@
 namespace: sample
 resources:
-  - deployment.yaml
-  - ingress.yaml
-  - service.yaml
+  - ./
 namePrefix: prod-
 commonLabels:
   env: prod
