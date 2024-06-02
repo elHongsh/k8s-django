@@ -1,0 +1,8 @@
+namespace: sample
+namePrefix: prod-
+commonLabels:
+  env: prod
+patches:
+  - path: deployment.yaml
+  - path: ingress.yaml
+  - path: service.yaml
