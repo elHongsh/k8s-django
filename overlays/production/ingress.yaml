@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: k8s_django-ingress
+  name: k8s-django-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
@@ -14,6 +14,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: k8s_django
+                name: k8s-django
 #                port:
 #                  number: 80

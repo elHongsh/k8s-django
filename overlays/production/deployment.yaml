@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: k8s_django
+  name: k8s-django
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: k8s_django
+      app: k8s-django
   template:
     metadata:
-      name: k8s_django
+      name: k8s-django
     spec:
       containers:
-        - name: k8s_django
-          image: k8s_django:0.0.1
+        - name: k8s-django
+          image: k8s-django:0.0.1
           ports:
             - containerPort: 8000
