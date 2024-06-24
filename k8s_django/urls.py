@@ -14,9 +14,33 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+import random
+
 from django.contrib import admin
+from django.http import HttpRequest, JsonResponse
 from django.urls import path
+
+node_id: int | None = None
+
+
+def node_version(request: HttpRequest) -> JsonResponse:
+    global node_id
+    if node_id is None:
+        node_id = random.randint(0x10000000, 0xFFFFFFFF)
+    data = {
+        'version': os.environ.get('APP_RELEASE'),
+        'node': hex(node_id).upper(),
+    }
+    return JsonResponse(data)
+
+
+def request_info(request: HttpRequest) -> JsonResponse:
+    return JsonResponse(request.headers.__dict__)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('test/node', node_version),
+    path('test/headers', request_info),
 ]
