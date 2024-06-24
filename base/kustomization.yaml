@@ -1,6 +1,4 @@
 resources:
-  - deployment.yaml
-  - ingress.yaml
-  - service.yaml
+  - app.yaml
 commonLabels:
   app: k8s-django
