@@ -12,9 +12,12 @@ spec:
       labels:
         app: k8s-django
     spec:
+      imagePullSecrets:
+        - name: docker-pull-secret
       containers:
         - name: k8s-django
           image: elhongsh/k8s-django:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
 ---
