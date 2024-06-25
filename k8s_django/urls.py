@@ -39,8 +39,13 @@ def request_info(request: HttpRequest) -> JsonResponse:
     return JsonResponse(request.headers.__dict__)
 
 
+def health_check(request: HttpRequest) -> JsonResponse:
+    return JsonResponse({'status': 'ok'})
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('healthz', health_check),
     path('test/node', node_version),
     path('test/headers', request_info),
 ]
