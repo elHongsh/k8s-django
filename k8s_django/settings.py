@@ -26,7 +26,17 @@ SECRET_KEY = 'django-insecure-b&+t&f@0e1-6otdh7bci2yx@oov3mn6rv5@_%qgfmxwbd+&t^o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = json.loads(os.environ.get('ALLOWED_HOSTS', '[]'))
+if os.environ.get('ALLOWED_HOSTS') is None:
+    os.environ['ALLOWED_HOSTS'] = '["localhost", "127.0.0.1"]'
+try:
+    # environment variable injected or running on local machine
+    allowed_hosts = json.loads(os.environ.get('ALLOWED_HOSTS'))
+except json.JSONDecodeError:
+    # default k8s
+    allowed_hosts = ['localhost']
+print(allowed_hosts)
+
+ALLOWED_HOSTS = allowed_hosts
 
 
 # Application definition
